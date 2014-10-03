@@ -38,7 +38,8 @@ function getAllContactsInCatagory(name, id) {
   $theSection.addClass("contacts");
   $theSectionHeader = $("section.contacts h1");
   $theSectionHeader.text("Contacts in " + name);
-  console.log($theSectionHeader); 
+  $theList = $("section.contacts ul");
+  $theList.empty();
   $.getJSON(
     "/categories/" + id, 
     null,
@@ -52,5 +53,12 @@ function getAllContactsInCatagory(name, id) {
 }
 
 function constructContactView(obj) {
-  console.log(obj);
+  var $theList = $("section.contacts ul");
+  var $contactItem = $("<li></li>");
+  $contactItem.attr("id", obj.id);
+  $contactItem.text(obj.name);
+  $contactItem.click(function() {
+    console.log(obj.name); 
+  });
+  $theList.append($contactItem);
 }
