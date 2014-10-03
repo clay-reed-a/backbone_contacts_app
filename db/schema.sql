@@ -1,14 +1,17 @@
+DROP TABLE categories;
+DROP TABLE contacts; 
+
 CREATE TABLE categories(
-  id serial primary key,
-  name varchar(255)
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255)
 );
 
 CREATE TABLE contacts(
-  id serial primary key,
-  name varchar(255),
-  age integer,
-  address varchar(255),
-  phone_number varchar(255),
-  picture text,
-  category_id integer
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  age INTEGER,
+  address VARCHAR(255),
+  phone_number VARCHAR(255),
+  picture TEXT,
+  category_id INTEGER
 );
