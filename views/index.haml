@@ -2,14 +2,25 @@
 %html{:lang => "en"}
 %head
   %meta{:charset => "uft-8"} 
-  %title Backbone Contacts App 
+  %title Backbone Contacts App
+  %script{:src => "/javascripts/jquery-2.1.1.min.js"} 
+
+  %link{:rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"}
+  %link{:rel => "stylesheet", :href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"}
+  %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"} 
   %link{:type => "text/css", :rel => "stylesheet", :href => "/stylesheets/styles.css"}
 
 %body
-  %section.categories 
-    %h1 Catagories 
-    %ul 
-  %script{:src => "/javascripts/jquery-2.1.1.min.js"}
+  %section.site 
+    %h1 Your People  
+    %nav.site 
+      %ul  
+    %nav.categories   
+      %ul
+  %section.content  
+
+
+  
   %script{:src => "/javascripts/underscore-min.js"}
   %script{:src => "/javascripts/backbone-min.js"}
   %script{:src => "/javascripts/scripts.js"} 
