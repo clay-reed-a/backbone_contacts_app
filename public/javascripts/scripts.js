@@ -148,7 +148,7 @@ function buildCategoryContactsView(categoryId) {
 
           var contactSection = document.createElement("section");
           var contactId = contact.id;
-          contactLi.id = contactId;
+          contactSection.id = contactId;
 
           var contactPicture = contact.picture;
           var contactImg = document.createElement("img");
@@ -182,14 +182,80 @@ function buildCategoryContactsView(categoryId) {
           addressPara.appendChild(addressSpan);
           addressPara.appendChild(address);
 
+          var editButton = document.createElement("button");
+          editButton.innerText = "Edit";
+          editButton.addEventListener("click", function(e) {
+            var editId = e.srcElement.parentNode.id;
+            $.getJSON("/contacts/" + editId, null, function(contactJSON) {
+              editContactView(contactJSON);
+            }); 
+          });
+
           contactSection.appendChild(contactImg);
           contactSection.appendChild(contactHeader);
           contactSection.appendChild(agePara);
           contactSection.appendChild(numberPara);
           contactSection.appendChild(addressPara);
+          contactSection.appendChild(editButton);
 
           contactLi.appendChild(contactSection);
         });
   contactList.appendChild(contactLi);
   }); 
 } 
+
+function editContactView(contactObj) {
+  var editView = document.querySelector("section.content");
+  editView.innerHTML = "";
+  $.getJSON("/categories", null, function(categories) {
+    for (var property in contactObj) {
+      var theLabel = document.createElement("label");
+      var theSpan = document.createElement("span");
+      var theValue = contactObj[property];
+      console.log(property);
+      switch (property) {
+        case "age":
+          var theInput = document.createElement("input");
+          theInput.name = property; 
+          theInput.id = property + "_input"; 
+          theInput.type = "date";
+          theInput.value = theValue;
+        break; 
+        case "phone_number":
+          var theInput = document.createElement("input");
+          theInput.name = property; 
+          theInput.id = property + "_input";
+          theInput.type = "tel";
+          theInput.value = theValue; 
+        break; 
+        case "category_id":
+          var theInput = document.createElement("select");
+          theInput.name = property; 
+          theInput.id = property + "_input";
+          theInput.value = theValue; 
+            $.each(categories, function(idx, category) {
+              var anOption = document.createElement("option");
+              var catVal = category.id;
+              var catName = category.name; 
+              anOption.value = catVal; 
+              anOption.innerHTML = catName; 
+            });
+        break; 
+        case "id": 
+          var theInput = document.createElement("input");
+          theInput.name = property;
+          theInput.id = property + "_input";
+          theInput.type = "hidden";
+          theInput.value = theValue; 
+        break; 
+        default: 
+          var theInput = document.createElement("input");
+          theInput.name = property;
+          theInput.id = property + "_input";
+          theInput.type = "text";
+          theInput.value = theValue; 
+        break; 
+      }
+    }
+  });
+}
