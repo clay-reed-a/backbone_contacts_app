@@ -63,6 +63,13 @@ $(function() {
     addContactsPictureLabel.appendChild(addContactsPictureInput);
     addContactsSection.appendChild(addContactsPictureLabel);
 
+    var submitButton = document.createElement("button");
+    addContactsSection.appendChild(submitButton);
+    submitButton.addEventListener("click", function() {
+      $.post(url, params, function() {
+      }, type)
+
+    });
   });
   $.getJSON("/categories", 
     null, 
