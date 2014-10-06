@@ -1,5 +1,69 @@
 $(function() {
+  var addLi = document.querySelector("nav.site li.add");
+  addLi.addEventListener("click", function() {
 
+    var addContactsSection = document.querySelector("section.content");
+    addContactsSection.innerHTML = "";
+    var addContactsHeader = document.createElement("h2");
+    addContactsHeader.innerText = "Add a Contact";
+    addContactsSection.appendChild(addContactsHeader);
+
+    var addContactsNameLabel = document.createElement("label");
+    var addContactsNameSpan = document.createElement("span");
+    addContactsNameSpan.innerText = "Name: ";
+    addContactsNameLabel.appendChild(addContactsNameSpan);
+    var addContactsNameInput = document.createElement("input");
+    addContactsNameInput.id = "name_input";
+    addContactsNameInput.name = "name";
+    addContactsNameInput.type = "text";
+    addContactsNameLabel.appendChild(addContactsNameInput);
+    addContactsSection.appendChild(addContactsNameLabel);
+
+    var addContactsAgeLabel = document.createElement("label");
+    var addContactsAgeSpan = document.createElement("span");
+    addContactsAgeSpan.innerText = "Age: ";
+    addContactsAgeLabel.appendChild(addContactsNameSpan);
+    addContactsAgeInput = document.createElement("input");
+    addContactsAgeInput.id = "age_input";
+    addContactsAgeInput.name = "age";
+    addContactsAgeInput.type = "date";
+    addContactsAgeLabel.appendChild(addContactsAgeInput);
+    addContactsSection.appendChild(addContactsAgeLabel);
+
+    var addContactsAddrLabel = document.createElement("label");
+    var addContactsAddrSpan = document.createElement("span");
+    addContactsAddrSpan.innerText = "Address: ";
+    addContactsAddrLabel.appendChild(addContactsAddrSpan);
+    var addContactsAddrInput = document.createElement("input");
+    addContactsAddrInput.id = "address_input";
+    addContactsAddrInput.name = "address";
+    addContactsAddrInput.type = "text";
+    addContactsAddrLabel.appendChild(addContactsAddrInput);
+    addContactsSection.appendChild(addContactsAddrLabel);
+
+    var addContactsNumberLabel = document.createElement("label");
+    var addContactsNumberSpan = document.createElement("span");
+    addContactsNumberSpan.innerText = "Number: ";
+    addContactsNumberLabel.appendChild(addContactsNumberSpan);
+    var addContactsNumberInput = document.createElement("input");
+    addContactsNumberInput.id = "number_input";
+    addContactsNumberInput.name = "number";
+    addContactsNumberInput.type = "tel";
+    addContactsNumberLabel.appendChild(addContactsNumberInput);
+    addContactsSection.appendChild(addContactsNumberLabel);
+
+    var addContactsPictureLabel = document.createElement("label");
+    var addContactsPictureSpan = document.createElement("span");
+    addContactsPictureSpan.innerText = "Picture URL: ";
+    addContactsPictureLabel.appendChild(addContactsPictureSpan);
+    var addContactsPictureInput = document.createElement("input");
+    addContactsPictureInput.id = "picture_input";
+    addContactsPictureInput.name = "picture";
+    addContactsPictureInput.type = "url";
+    addContactsPictureLabel.appendChild(addContactsPictureInput);
+    addContactsSection.appendChild(addContactsPictureLabel);
+
+  });
   $.getJSON("/categories", 
     null, 
     function(categoriesJSON) {
@@ -18,7 +82,10 @@ $(function() {
             $.getJSON("/categories/" + categoryId, null,
               function(categoryJSON) {
                 console.log(categoryJSON);
-                var contactList = document.querySelector("section.content ul");
+                var contactSection = document.querySelector("section.content");
+                contactSection.innerHTML = "";
+                var contactList = document.createElement("ul");
+                contactSection.appendChild(contactList);
                 var contacts = categoryJSON.contacts;
                 var contactLi = document.createElement("li");
                 $.each(contacts, 
