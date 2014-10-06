@@ -1,80 +1,100 @@
 $(function() {
   var addLi = document.querySelector("nav.site li.add");
   addLi.addEventListener("click", function() {
+    $.getJSON("/categories", 
+      null, 
+      function(categoriesJSON){
+        var addContactsSection = document.querySelector("section.content");
+        addContactsSection.innerHTML = "";
+        var addContactsHeader = document.createElement("h2");
+        addContactsHeader.innerText = "Add a Contact";
+        addContactsSection.appendChild(addContactsHeader);
 
-    var addContactsSection = document.querySelector("section.content");
-    addContactsSection.innerHTML = "";
-    var addContactsHeader = document.createElement("h2");
-    addContactsHeader.innerText = "Add a Contact";
-    addContactsSection.appendChild(addContactsHeader);
+        var addContactsNameLabel = document.createElement("label");
+        var addContactsNameSpan = document.createElement("span");
+        addContactsNameSpan.innerText = "Name: ";
+        addContactsNameLabel.appendChild(addContactsNameSpan);
+        var addContactsNameInput = document.createElement("input");
+        addContactsNameInput.id = "name_input";
+        addContactsNameInput.name = "name";
+        addContactsNameInput.type = "text";
+        addContactsNameLabel.appendChild(addContactsNameInput);
+        addContactsSection.appendChild(addContactsNameLabel);
 
-    var addContactsNameLabel = document.createElement("label");
-    var addContactsNameSpan = document.createElement("span");
-    addContactsNameSpan.innerText = "Name: ";
-    addContactsNameLabel.appendChild(addContactsNameSpan);
-    var addContactsNameInput = document.createElement("input");
-    addContactsNameInput.id = "name_input";
-    addContactsNameInput.name = "name";
-    addContactsNameInput.type = "text";
-    addContactsNameLabel.appendChild(addContactsNameInput);
-    addContactsSection.appendChild(addContactsNameLabel);
+        var addContactsCategoryLabel = document.createElement("label");
+        addContactsCategorySpan = document.createElement("span");
+        addContactsCategorySpan.innerText = "Category: ";
+        addContactsCategoryLabel.appendChild(addContactsCategorySpan);
+        var addContactsCategorySelect = document.createElement("select");
+        addContactsCategorySelect.id = "category_input";
+        addContactsCategorySelect.name = "category";
+        $.each(categoriesJSON, function(idx, categoryObj) {
+          var categoryOption = document.createElement("option");
+          categoryOption.innerText = categoryObj.name; 
+          categoryOption.value = categoryObj.id;
+          addContactsCategorySelect.appendChild(categoryOption);  
+        });
+        addContactsCategoryLabel.appendChild(addContactsCategorySelect);
+        addContactsSection.appendChild(addContactsCategoryLabel);
 
-    var addContactsAgeLabel = document.createElement("label");
-    var addContactsAgeSpan = document.createElement("span");
-    addContactsAgeSpan.innerText = "Age: ";
-    addContactsAgeLabel.appendChild(addContactsNameSpan);
-    addContactsAgeInput = document.createElement("input");
-    addContactsAgeInput.id = "age_input";
-    addContactsAgeInput.name = "age";
-    addContactsAgeInput.type = "date";
-    addContactsAgeLabel.appendChild(addContactsAgeInput);
-    addContactsSection.appendChild(addContactsAgeLabel);
+        var addContactsAgeLabel = document.createElement("label");
+        var addContactsAgeSpan = document.createElement("span");
+        addContactsAgeSpan.innerText = "Age: ";
+        addContactsAgeLabel.appendChild(addContactsAgeSpan);
+        var addContactsAgeInput = document.createElement("input");
+        addContactsAgeInput.id = "age_input";
+        addContactsAgeInput.name = "age";
+        addContactsAgeInput.type = "date";
+        addContactsAgeLabel.appendChild(addContactsAgeInput);
+        addContactsSection.appendChild(addContactsAgeLabel);
 
-    var addContactsAddrLabel = document.createElement("label");
-    var addContactsAddrSpan = document.createElement("span");
-    addContactsAddrSpan.innerText = "Address: ";
-    addContactsAddrLabel.appendChild(addContactsAddrSpan);
-    var addContactsAddrInput = document.createElement("input");
-    addContactsAddrInput.id = "address_input";
-    addContactsAddrInput.name = "address";
-    addContactsAddrInput.type = "text";
-    addContactsAddrLabel.appendChild(addContactsAddrInput);
-    addContactsSection.appendChild(addContactsAddrLabel);
+        var addContactsAddrLabel = document.createElement("label");
+        var addContactsAddrSpan = document.createElement("span");
+        addContactsAddrSpan.innerText = "Address: ";
+        addContactsAddrLabel.appendChild(addContactsAddrSpan);
+        var addContactsAddrInput = document.createElement("input");
+        addContactsAddrInput.id = "address_input";
+        addContactsAddrInput.name = "address";
+        addContactsAddrInput.type = "text";
+        addContactsAddrLabel.appendChild(addContactsAddrInput);
+        addContactsSection.appendChild(addContactsAddrLabel);
 
-    var addContactsNumberLabel = document.createElement("label");
-    var addContactsNumberSpan = document.createElement("span");
-    addContactsNumberSpan.innerText = "Number: ";
-    addContactsNumberLabel.appendChild(addContactsNumberSpan);
-    var addContactsNumberInput = document.createElement("input");
-    addContactsNumberInput.id = "number_input";
-    addContactsNumberInput.name = "number";
-    addContactsNumberInput.type = "tel";
-    addContactsNumberLabel.appendChild(addContactsNumberInput);
-    addContactsSection.appendChild(addContactsNumberLabel);
+        var addContactsNumberLabel = document.createElement("label");
+        var addContactsNumberSpan = document.createElement("span");
+        addContactsNumberSpan.innerText = "Number: ";
+        addContactsNumberLabel.appendChild(addContactsNumberSpan);
+        var addContactsNumberInput = document.createElement("input");
+        addContactsNumberInput.id = "number_input";
+        addContactsNumberInput.name = "number";
+        addContactsNumberInput.type = "tel";
+        addContactsNumberLabel.appendChild(addContactsNumberInput);
+        addContactsSection.appendChild(addContactsNumberLabel);
 
-    var addContactsPictureLabel = document.createElement("label");
-    var addContactsPictureSpan = document.createElement("span");
-    addContactsPictureSpan.innerText = "Picture URL: ";
-    addContactsPictureLabel.appendChild(addContactsPictureSpan);
-    var addContactsPictureInput = document.createElement("input");
-    addContactsPictureInput.id = "picture_input";
-    addContactsPictureInput.name = "picture";
-    addContactsPictureInput.type = "url";
-    addContactsPictureLabel.appendChild(addContactsPictureInput);
-    addContactsSection.appendChild(addContactsPictureLabel);
+        var addContactsPictureLabel = document.createElement("label");
+        var addContactsPictureSpan = document.createElement("span");
+        addContactsPictureSpan.innerText = "Picture URL: ";
+        addContactsPictureLabel.appendChild(addContactsPictureSpan);
+        var addContactsPictureInput = document.createElement("input");
+        addContactsPictureInput.id = "picture_input";
+        addContactsPictureInput.name = "picture";
+        addContactsPictureInput.type = "url";
+        addContactsPictureLabel.appendChild(addContactsPictureInput);
+        addContactsSection.appendChild(addContactsPictureLabel);
 
-    var submitButton = document.createElement("button");
-    addContactsSection.appendChild(submitButton);
-    submitButton.addEventListener("click", function() {
-      $.post(url, params, function() {
-      }, type)
+        var submitButton = document.createElement("button");
+        addContactsSection.appendChild(submitButton);
+        submitButton.addEventListener("click", function() {
+          $.post(url, params, function() {
 
+          }, type);
+        });
+      });
     });
-  });
   $.getJSON("/categories", 
     null, 
     function(categoriesJSON) {
       var $categoryNav = $("nav.categories");
+
       $.each(categoriesJSON,
         function(idx, categoryObj) {
           var categoryId = categoryObj.id;
