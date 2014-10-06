@@ -90,14 +90,20 @@ $(function() {
           var ageInput = document.querySelector("#age_input");
           var categoryInput = document.querySelector("#category_input");
           var nameInput = document.querySelector("#name_input");
+
+          var bDay = new Date(ageInput.value);
+          var currentDate = new Date;
+          var diff = currentDate - bDay; 
+          var massive = 1000 * 60 * 60 * 24 * 365; 
+          var contactAge = Math.floor((1/massive)*diff); 
+
           var params = {
             "name": nameInput.value, 
-            "age": ageInput.value, 
+            "age": contactAge, 
             "address": addressInput.value, 
             "phone_number": numberInput.value, 
             "picture": pictureInput.value, 
             "category_id": categoryInput.value 
-
           };
           $.post("/contacts", params, function(newContact) {
             var whichCategory = newContact.category_id;
