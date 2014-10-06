@@ -213,47 +213,67 @@ function editContactView(contactObj) {
       var theSpan = document.createElement("span");
       var theValue = contactObj[property];
       console.log(property);
+      console.log(theValue);
       switch (property) {
         case "age":
+          theSpan.innerText = property + ": "; 
+          theLabel.appendChild(theSpan);
           var theInput = document.createElement("input");
           theInput.name = property; 
           theInput.id = property + "_input"; 
           theInput.type = "date";
           theInput.value = theValue;
+          theLabel.appendChild(theInput);
+          editView.appendChild(theLabel);
         break; 
         case "phone_number":
+          theSpan.innerText = property + ": ";
+          theLabel.appendChild(theSpan);
           var theInput = document.createElement("input");
           theInput.name = property; 
           theInput.id = property + "_input";
           theInput.type = "tel";
           theInput.value = theValue; 
+          theLabel.appendChild(theInput);
+          editView.appendChild(theLabel);
         break; 
         case "category_id":
+          theSpan.innerText = "Category: ";
+          theLabel.appendChild(theSpan);
           var theInput = document.createElement("select");
           theInput.name = property; 
           theInput.id = property + "_input";
-          theInput.value = theValue; 
-            $.each(categories, function(idx, category) {
-              var anOption = document.createElement("option");
-              var catVal = category.id;
-              var catName = category.name; 
-              anOption.value = catVal; 
-              anOption.innerHTML = catName; 
-            });
+          $.each(categories, function(idx, category) {
+            var anOption = document.createElement("option");
+            var catVal = category.id;
+            var catName = category.name; 
+            if (catVal == theValue)
+              anOption.selected = true; 
+            anOption.value = catVal; 
+            anOption.innerHTML = catName; 
+            theInput.appendChild(anOption);
+          });
+          theLabel.appendChild(theInput);
+          editView.appendChild(theLabel);
         break; 
-        case "id": 
+        case "id":
           var theInput = document.createElement("input");
           theInput.name = property;
           theInput.id = property + "_input";
           theInput.type = "hidden";
           theInput.value = theValue; 
+          editView.appendChild(theInput);
         break; 
-        default: 
+        default:
+          theSpan.innerText = property + ": ";
+          theLabel.appendChild(theSpan); 
           var theInput = document.createElement("input");
           theInput.name = property;
           theInput.id = property + "_input";
           theInput.type = "text";
           theInput.value = theValue; 
+          theLabel.appendChild(theInput);
+          editView.appendChild(theLabel);
         break; 
       }
     }
